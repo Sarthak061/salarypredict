@@ -11,49 +11,87 @@ def load_model():
 data = load_model()
 
 regressor = data["model"]
+le_naac = data["le_naac"]
+le_course = data["le_course"]
+le_upskill = data["le_upskill"]
+le_pgcourse = data["le_pgcourse"]
 le_country = data["le_country"]
-le_education = data["le_education"]
 
 def show_predict_page():
-    st.title("Software Developer Salary Prediction")
+    st.title("Freshers Salary Prediction")
 
     st.write("""### We need some information to predict the salary""")
 
-    countries = (
-        "United States",
-        "India",
-        "United Kingdom",
-        "Germany",
-        "Canada",
-        "Brazil",
-        "France",
-        "Spain",
-        "Australia",
-        "Netherlands",
-        "Poland",
-        "Italy",
-        "Russian Federation",
-        "Sweden",
+    naac = (
+           "A++",
+           "A+",
+           "A",
+           "B++",
+           "B+",
+           "B",
+           "C",
+           "D",
+           "No Grade"
     )
 
-    education = (
-        "Less than a Bachelors",
-        "Bachelor’s degree",
-        "Master’s degree",
-        "Post grad",
+    course = (
+            "BE in CS,Electronics,IT,Telecom",
+            "BE in data science",
+            "BE in others",
+            "BCOM",
+            "BA",
+            "BSc",
+            "PG in HR",
+            "PG in Marketing",
+            "PG in finance",
+            "PG in Data science",
+            "CA"
+    )
+    upskill = (
+           "IT",
+           "Data Science",
+           "Finance",
+           "Management",
+           "Art"
+    )
+    
+    pgcourse = (
+        "Engineering",
+            "IT",
+            "Management",
+            "Finance",
+            "Economics",
+            "Others"
+    )
+    
+    country = ("US",
+               "Australia",
+               "Germany",
+               "UK",
+               "India",
+               "Canada",
+               "Other Asian countries",
+               "Other European countries"
     )
 
-    country = st.selectbox("Country", countries)
-    education = st.selectbox("Education Level", education)
+    naac = st.selectbox("NAAC Grade", naac)
+    course = st.selectbox("Course", course)
+    upskill = st.selection("Upskill Course", upskill)
+    pgcourse = st.selection("PG Course", pgcourse)
+    country = st.selection("Country for PG", country)
 
-    expericence = st.slider("Years of Experience", 0, 50, 3)
+    ranking = st.slider("Ranking of College for PG", 0, 200, 1)
 
-    ok = st.button("Calculate Salary")
+    ok = st.button("Predict Salary")
     if ok:
-        X = np.array([[country, education, expericence ]])
-        X[:, 0] = le_country.transform(X[:,0])
-        X[:, 1] = le_education.transform(X[:,1])
+        X = np.array([[naac,ourse,upskill,pgcourse,country,ranking]])
+        X[:, 0] = le_naac.transform(X[:,0]) 
+        X[:, 1] = le_course.transform(X[:,1])
+         X[:, 0] = le_upskill.transform(X[:,0]) 
+            X[:, 0] = le_pgcourse.transform(X[:,0]) 
+            X[:, 0] = le_country.transform(X[:,0])
+             X[:, 0] = le_ranking.transform(X[:,0])
         X = X.astype(float)
 
         salary = regressor.predict(X)
-        st.subheader(f"The estimated salary is ${salary[0]:.2f}")
+        st.subheader(f"The estimated salary is {salary[0]:.2f}/-")
