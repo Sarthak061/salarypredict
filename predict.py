@@ -4,7 +4,7 @@ import numpy as np
 
 
 def load_model():
-    with open('saved_steps.pkl', 'rb') as file:
+    with open('Model1.pkl', 'rb') as file:
         data = pickle.load(file)
     return data
 
@@ -84,13 +84,13 @@ def show_predict_page():
 
     ok = st.button("Predict Salary")
     if ok:
-        X = np.array([[naac,ourse,upskill,pgcourse,country,ranking]])
+        X = np.array([[naac,course,upskill,pgcourse,country,ranking]])
         X[:, 0] = le_naac.transform(X[:,0]) 
         X[:, 1] = le_course.transform(X[:,1])
-         X[:, 0] = le_upskill.transform(X[:,0]) 
-            X[:, 0] = le_pgcourse.transform(X[:,0]) 
-            X[:, 0] = le_country.transform(X[:,0])
-             X[:, 0] = le_ranking.transform(X[:,0])
+        X[:, 0] = le_upskill.transform(X[:,0]) 
+        X[:, 0] = le_pgcourse.transform(X[:,0]) 
+        X[:, 0] = le_country.transform(X[:,0])
+        X[:, 0] = le_ranking.transform(X[:,0])
         X = X.astype(float)
 
         salary = regressor.predict(X)
