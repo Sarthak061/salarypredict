@@ -2,19 +2,6 @@ import streamlit as st
 import pickle
 import numpy as np
 
-def load_model():
-    with open('Model1.pkl', 'rb') as file:
-        data = pickle.load(file)
-    return data
-
-data = load_model()
-
-regressor = data["model1"]
-le_naac = data["le_naac"]
-le_course = data["le_course"]
-le_upskill = data["le_upskill"]
-le_pgcourse = data["le_pgcourse"]
-le_country = data["le_country"]
 
 def show_predict():
     st.title("Freshers Salary Prediction")
