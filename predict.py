@@ -68,15 +68,15 @@ def show_predict():
 
     naac = df['naac1'].drop_duplicates()
     naac1 = st.selectbox("NAAC Grade", naac)
-    course = df["course1"].loc[df["naac"] = naac1]
+    course = df["course1"].loc[df["naac"] == naac1]
     course1 = st.selectbox("Course", course)
-    upskill = df["upskill1"].loc[df["naac"] = naac1 ]
+    upskill = df["upskill1"].loc[df["naac"] == naac1 ]
     upskill1 = st.selection("Upskill Course", upskill)
-    pgcourse = df["pgcourse1"].loc[df["naac"] = naac1]
+    pgcourse = df["pgcourse1"].loc[df["naac"] == naac1]
     pgcourse1 = st.selection("PG Course", pgcourse)
-    country = df["country1"].loc[df["naac"] = naac1]
+    country = df["country1"].loc[df["naac"] == naac1]
     country1 = st.selection("Country for PG", country)
-    ranking = df["ranking1"].loc[df["naac"] = naac1]
+    ranking = df["ranking1"].loc[df["naac"] == naac1]
     ranking1 = st.slider("Ranking of College for PG", 0, 200, 1)
 
     ok = st.button("Predict Salary")
