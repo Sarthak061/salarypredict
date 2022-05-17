@@ -81,12 +81,12 @@ def show_predict():
 
     ok = st.button("Predict Salary")
     if ok:
-        X = np.array([[naac,course,upskill,pgcourse,country,ranking]])
-        X[:, 0] = naac.transform(X[:,0]) 
-        X[:, 1] = course.transform(X[:,1])
-        X[:, 0] = upskill.transform(X[:,0]) 
-        X[:, 0] = pgcourse.transform(X[:,0]) 
-        X[:, 0] = country.transform(X[:,0])
+        X = np.array([[naac1,course1,upskill1,pgcourse1,country1,ranking1]])
+        X[:, 0] = naac1.transform(X[:,0]) 
+        X[:, 1] = course1.transform(X[:,1])
+        X[:, 0] = upskill1.transform(X[:,0]) 
+        X[:, 0] = pgcourse1.transform(X[:,0]) 
+        X[:, 0] = country1.transform(X[:,0])
         X = X.astype(float)
 
         #salary = regressor.predict(X)
