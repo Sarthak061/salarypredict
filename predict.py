@@ -4,7 +4,7 @@ import numpy as np
 
 
 def load_model():
-    pickle_in = open('classifier.pkl', 'rb') 
+    pickle_in = open('model1.pkl', 'rb') 
     classifier = pickle.load(pickle_in)
 
 data = load_model()
