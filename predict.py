@@ -9,7 +9,7 @@ def load_model():
 
 data = load_model()
 
-
+regressor = data["model"]
 le_naac = data["le_naac"]
 le_course = data["le_course"]
 le_upskill = data["le_upskill"]
