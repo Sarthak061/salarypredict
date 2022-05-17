@@ -1,19 +1,13 @@
 import streamlit as st
 import pickle
 import numpy as np
-def load_model():
-    with open('Model1.pkl', 'rb') as file:
-        data = pickle.load(file)
-    return data
+import pandas as pd
 
-data = load_model()
-
-regressor = data["model1"]
-le_naac = data["le_naac"]
-le_course = data["le_course"]
-le_upskill = data["le_upskill"]
-le_pgcourse = data["le_pgcourse"]
-le_country = data["le_country"]
+@st.cache
+def get_data():
+path = r'input.csv'
+return pd.read_csv(path)
+df = get_data()
 
 def show_predict():
     st.title("Freshers Salary Prediction")
@@ -72,23 +66,28 @@ def show_predict():
                "Other European countries"
     )
 
-    naac = st.selectbox("NAAC Grade", naac)
-    course = st.selectbox("Course", course)
-    upskill = st.selection("Upskill Course", upskill)
-    pgcourse = st.selection("PG Course", pgcourse)
-    country = st.selection("Country for PG", country)
-
-    ranking = st.slider("Ranking of College for PG", 0, 200, 1)
+    naac = df['naac1'].drop_duplicates()
+    naac1 = st.selectbox("NAAC Grade", naac)
+    course = df["course1"].loc[df["naac"] = naac1]
+    course1 = st.selectbox("Course", course)
+    upskill = df["upskill1"].loc[df["naac"] = naac1 ]
+    upskill1 = st.selection("Upskill Course", upskill)
+    pgcourse = df["pgcourse1"].loc[df["naac"] = naac1]
+    pgcourse1 = st.selection("PG Course", pgcourse)
+    country = df["country1"].loc[df["naac"] = naac1]
+    country1 = st.selection("Country for PG", country)
+    ranking = df["ranking1"].loc[df["naac"] = naac1]
+    ranking1 = st.slider("Ranking of College for PG", 0, 200, 1)
 
     ok = st.button("Predict Salary")
     if ok:
         X = np.array([[naac,course,upskill,pgcourse,country,ranking]])
-        X[:, 0] = le_naac.transform(X[:,0]) 
-        X[:, 1] = le_course.transform(X[:,1])
-        X[:, 0] = le_upskill.transform(X[:,0]) 
-        X[:, 0] = le_pgcourse.transform(X[:,0]) 
-        X[:, 0] = le_country.transform(X[:,0])
+        X[:, 0] = naac.transform(X[:,0]) 
+        X[:, 1] = course.transform(X[:,1])
+        X[:, 0] = upskill.transform(X[:,0]) 
+        X[:, 0] = pgcourse.transform(X[:,0]) 
+        X[:, 0] = country.transform(X[:,0])
         X = X.astype(float)
 
-        salary = regressor.predict(X)
-        st.subheader(f"The estimated salary is {salary[0]:.2f}/-")
+        #salary = regressor.predict(X)
+        #st.subheader(f"The estimated salary is {salary[0]:.2f}/-")
