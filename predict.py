@@ -7,7 +7,6 @@ import pandas as pd
 def get_data():
     path = r'input.csv'
     return pd.read_csv(path)
-
 df = get_data()
 
 def show_predict():
