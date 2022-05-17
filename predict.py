@@ -7,6 +7,8 @@ def load_model():
         data = pickle.load(file)
     return data
 
+data = load_model()
+
 regressor = data["model"]
 le_naac = data["le_naac"]
 le_course = data["le_course"]
