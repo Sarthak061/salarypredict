@@ -2,10 +2,10 @@ import streamlit as st
 import pickle
 import numpy as np
 
-
-
-pickle_in = open('Model1.pkl', 'rb') 
-data = pickle.load(pickle_in)
+def load_model():
+    with open('Model1.pkl', 'rb') as file:
+        data = pickle.load(file)
+    return data
 
 regressor = data["model"]
 le_naac = data["le_naac"]
