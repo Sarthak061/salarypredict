@@ -10,4 +10,3 @@ streamlit
 yfinance
 #matplotlib
 #warnings
-pickle
