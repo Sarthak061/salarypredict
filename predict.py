@@ -3,11 +3,9 @@ import pickle
 import numpy as np
 
 
-def load_model():
-    pickle_in = open('model1.pkl', 'rb') 
-    data = pickle.load(pickle_in)
 
-data = load_model()
+pickle_in = open('Model1.pkl', 'rb') 
+data = pickle.load(pickle_in)
 
 regressor = data["model"]
 le_naac = data["le_naac"]
