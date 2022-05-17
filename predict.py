@@ -9,7 +9,7 @@ def load_model():
 
 data = load_model()
 
-regressor = data["model"]
+regressor = data["model1"]
 le_naac = data["le_naac"]
 le_course = data["le_course"]
 le_upskill = data["le_upskill"]
@@ -19,7 +19,7 @@ le_country = data["le_country"]
 def show_predict():
     st.title("Freshers Salary Prediction")
 
-    st.write("""### We need some information to predict the salary""")
+    st.write("""### We need some information to predict the salary ###""")
 
     naac = (
            "A++",
@@ -89,7 +89,6 @@ def show_predict():
         X[:, 0] = le_upskill.transform(X[:,0]) 
         X[:, 0] = le_pgcourse.transform(X[:,0]) 
         X[:, 0] = le_country.transform(X[:,0])
-        X[:, 0] = le_ranking.transform(X[:,0])
         X = X.astype(float)
 
         salary = regressor.predict(X)
