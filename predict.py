@@ -17,7 +17,7 @@ le_upskill = data["le_upskill"]
 le_pgcourse = data["le_pgcourse"]
 le_country = data["le_country"]
 
-def show_predict_page():
+def show_predict():
     st.title("Freshers Salary Prediction")
 
     st.write("""### We need some information to predict the salary""")
