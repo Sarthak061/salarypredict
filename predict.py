@@ -5,7 +5,7 @@ import pandas as pd
 
 @st.cache
 def get_data():
-path = r'input.csv'
+path= r'input.csv'
 return pd.read_csv(path)
 df = get_data()
 
